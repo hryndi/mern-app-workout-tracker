@@ -5,7 +5,7 @@ import workOutRoutes from "./routes/workouts.js";
 import mongoose from "mongoose";
 import cors from "cors";
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8000;
 
 app.use(cors());
 app.use(express.json());
@@ -23,9 +23,7 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     app.listen(PORT, () => {
-      console.log(
-        `connected to db & listening on port ${PORT}`.underline.bold.green
-      );
+      console.log(`connected to db & listening on port ${PORT}`.underline.bold.green);
     });
   })
   .catch((error) => {

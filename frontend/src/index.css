@@ -1,6 +1,11 @@
 /* google font */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap");
 
+h1,
+h3 {
+  color: #262626;
+}
+
 /* layout */
 :root {
   --primary: #1aac83;
@@ -35,8 +40,9 @@ header a {
 /* homepage */
 .home {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: minmax(300px, 3fr) minmax(150px, 1fr);
   gap: 100px;
+  padding-inline: 4rem;
 }
 .workout-details {
   background: #fff;
@@ -49,6 +55,7 @@ header a {
 .workout-details h4 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
+
   color: var(--primary);
 }
 .workout-details p {
@@ -109,4 +116,18 @@ div.error {
 }
 input.error {
   border: 1px solid var(--error);
+}
+
+@media (max-width: 640px) {
+  .home {
+    padding-inline: 1rem;
+    grid-template-columns: 1fr;
+  }
+
+  .create {
+    order: 1;
+  }
+  .workouts {
+    order: 2;
+  }
 }

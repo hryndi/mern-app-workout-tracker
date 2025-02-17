@@ -4,13 +4,16 @@ import WorkoutForm from "../components/WorkoutForm";
 import WorkoutDetails from "../components/WorkoutDetails";
 
 import { UseWorkoutsContext } from "../hooks/useWorkoutsContext";
+
+import API_BASE_URL from "../config";
+
 const Home = () => {
   //   const [workouts, setWorkouts] = useState<TResponse[] | null>(null);
   const { workouts, dispatch } = UseWorkoutsContext();
 
   useEffect(() => {
     const fetchWorkouts = async () => {
-      const response = await fetch("/api/workouts");
+      const response = await fetch(`${API_BASE_URL}/api/workouts`);
       const json = await response.json();
 
       if (response.ok) {

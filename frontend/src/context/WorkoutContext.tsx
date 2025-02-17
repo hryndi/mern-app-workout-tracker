@@ -1,5 +1,5 @@
 import { createContext, useReducer, ReactNode, Dispatch } from "react";
-import { TResponse } from "../pages/types";
+import { TResponse } from "../types";
 
 // Define State Type
 type WorkoutsState = {
@@ -21,24 +21,17 @@ type WorkoutsContextType = WorkoutsState & {
 export const WorkoutsContext = createContext<WorkoutsContextType | null>(null);
 
 // Reducer Function
-export const workoutsReducer = (
-  state: WorkoutsState,
-  action: WorkoutsAction
-): WorkoutsState => {
+export const workoutsReducer = (state: WorkoutsState, action: WorkoutsAction): WorkoutsState => {
   switch (action.type) {
     case "SET_WORKOUTS":
       return { workouts: action.payload };
     case "DELETE_WORKOUT":
       return {
-        workouts: state.workouts
-          ? state.workouts.filter((item) => item._id !== action.payload._id)
-          : state.workouts,
+        workouts: state.workouts ? state.workouts.filter((item) => item._id !== action.payload._id) : state.workouts,
       };
     case "CREATE_WORKOUT":
       return {
-        workouts: state.workouts
-          ? [action.payload, ...state.workouts]
-          : [action.payload],
+        workouts: state.workouts ? [action.payload, ...state.workouts] : [action.payload],
       };
     default:
       return state;
@@ -46,16 +39,8 @@ export const workoutsReducer = (
 };
 
 // Context Provider Component
-export const WorkoutContextProvider = ({
-  children,
-}: {
-  children: ReactNode;
-}) => {
+export const WorkoutContextProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(workoutsReducer, { workouts: null });
 
-  return (
-    <WorkoutsContext.Provider value={{ ...state, dispatch }}>
-      {children}
-    </WorkoutsContext.Provider>
-  );
+  return <WorkoutsContext.Provider value={{ ...state, dispatch }}>{children}</WorkoutsContext.Provider>;
 };

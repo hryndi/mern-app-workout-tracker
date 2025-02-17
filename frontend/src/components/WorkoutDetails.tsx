@@ -1,13 +1,14 @@
-import { TResponse } from "../pages/types";
+import { TResponse } from "../types";
 import { AiOutlineDelete } from "react-icons/ai";
 import { UseWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { formatDistanceToNow } from "date-fns";
+import API_BASE_URL from "../config";
 
 const WorkoutDetails = ({ workout }: { workout: TResponse }) => {
   const { dispatch } = UseWorkoutsContext();
 
   const deleteHandler = async () => {
-    const response = await fetch("/api/workouts/" + workout._id, {
+    const response = await fetch(`${API_BASE_URL}/api/workouts/` + workout._id, {
       method: "DELETE",
     });
     const json = await response.json();
@@ -26,9 +27,7 @@ const WorkoutDetails = ({ workout }: { workout: TResponse }) => {
         <strong>Number of reps: </strong>
         {workout.reps}
       </p>
-      <p>
-        {formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}
-      </p>
+      <p>{formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}</p>
       <span onClick={deleteHandler}>
         <AiOutlineDelete className="icon" />
       </span>

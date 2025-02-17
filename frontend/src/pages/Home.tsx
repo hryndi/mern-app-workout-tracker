@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import WorkoutForm from "../components/WorkoutForm";
 // components
 import WorkoutDetails from "../components/WorkoutDetails";
-import { TResponse } from "./types";
+
 import { UseWorkoutsContext } from "../hooks/useWorkoutsContext";
 const Home = () => {
   //   const [workouts, setWorkouts] = useState<TResponse[] | null>(null);
@@ -24,10 +24,7 @@ const Home = () => {
   return (
     <div className="home">
       <div className="workouts">
-        {workouts &&
-          workouts.map((workout) => (
-            <WorkoutDetails workout={workout} key={workout._id} />
-          ))}
+        {workouts && workouts.map((workout) => <WorkoutDetails workout={workout} key={workout._id} />)}
       </div>
       <WorkoutForm />
     </div>
